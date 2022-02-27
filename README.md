@@ -1,6 +1,7 @@
 # Visualizing Solar Protocol Data 
 
 - Data is from the Solar Protocol API: [http://solarprotocol.net/api/v1/](http://solarprotocol.net/api/v1/)
+- Offline copies of API data are stored in data folder
 
 Examples in:
 - Javascript using the P5 library (client side rendering)
