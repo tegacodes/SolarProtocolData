@@ -1,12 +1,12 @@
-//Graphing a Value from the Solar Protocol API
+//Getting a value from the Solar Protocol API
+//preview data at http://solarprotocol.net/api/v1/
 
 //Set margins for the graph
 let yMargin = 50;
 let xMargin = 50;
 
-//Array to hold data
-let dataV = [];
-let dataC = [];
+let dataV = []; //Array to hold voltage data
+let dataC = []; //Array to hold current data
 
 let pd, ph = 0;
 let v =0;
@@ -15,38 +15,38 @@ let c=0; //color counter
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //preview data at http://solarprotocol.net/api/v1/chargecontroller.php
-  //loadJSON('http://solarprotocol.net/api/v1/opendata.php?value=PV-voltage&duration=2', gotPVVoltage); 
-  //loadJSON('http://solarprotocol.net/api/v1/opendata.php?value=PV-current&duration=2', gotPVCurrent); 
+  loadJSON('http://solarprotocol.net/api/v2/opendata.php?value=PV-voltage&duration=2', gotVData); 
+  loadJSON('http://solarprotocol.net/api/v2/opendata.php?value=PV-current&duration=2', gotCData); 
 
-  loadJSON('../../data/PVVoltage.json', gotVData); 
-  //loadJSON('../../data/PVCurrent.json', gotPVCurrent); 
-  loadJSON('../../data/PVCurrent.json', gotCData); 
+  // Offline data
+  // loadJSON('../../data/1-PVVoltage-2d.json', gotVData); 
+  // loadJSON('../../data/1-PVCurrent-2d.json', gotCData); 
 
   background(210);
   strokeWeight(0.5);
   textFont('Times');
   textSize(12);
-
  
   colors = ["blue", "red", "green", "yellow", "pink", "orange", "purple"];
 
-  noLoop();
+  noLoop(); //no need to loop draw
 }
 
 function draw() {
   drawAxes();
-
-
 }
 
-function gotVData(tempdata){
-  //put dates and vales into arrays
-  dateStrings = Object.keys(tempdata);
-  vals = Object.values(tempdata);
+function gotVData(tempData){
+  // console.log(Object.keys(tempData.data));
 
-  //convert date strings into dayjs objects. Push date objects and values onto an array called data. 
-  for(let i=1;i<dateStrings.length; i++){
+  //put dates into arrays
+  let dateStrings = Object.keys(tempData.data);
+  //put valees into an array 
+  let vals = Object.values(tempData.data);
+
+
+  //convert date strings into dayjs objects. Push date objects and values onto an array called dataV. 
+  for(let i=0;i<dateStrings.length; i++){
     dataV.push({date: dayjs(dateStrings[i]), val: Number(vals[i])})
   }
 
@@ -54,16 +54,16 @@ function gotVData(tempdata){
   dataV = dataV.sort((a, b) => (a.date.isAfter(b.date) ? 1 : -1))
   
   //draw data sending name and data array as arguments
-  drawData(vals[0], dataV); 
+  drawData(tempData.header.datetime, dataV); 
 }
 
-function gotCData(tempdata){
+function gotCData(tempData){
   //put dates and vales into arrays
-  dateStrings = Object.keys(tempdata);
-  vals = Object.values(tempdata);
+  let dateStrings = Object.keys(tempData.data);
+  let vals = Object.values(tempData.data);
 
   //convert date strings into dayjs objects. Push date objects and values onto an array called data. 
-  for(let i=1;i<dateStrings.length; i++){
+  for(let i=0;i<dateStrings.length; i++){
     dataC.push({date: dayjs(dateStrings[i]), val: Number(vals[i])})
   }
 
@@ -71,7 +71,7 @@ function gotCData(tempdata){
   dataC = dataC.sort((a, b) => (a.date.isAfter(b.date) ? 1 : -1))
   
   //draw data sending name and data array as arguments
-  drawData(vals[0], dataC); 
+  drawData(tempData.header.datetime, dataC); 
 }
 
 function drawData(name, data){
@@ -117,57 +117,9 @@ function drawData(name, data){
 }
 
 
-
-
 function drawAxes(){
     //draw axes
     stroke(0,0,0);
     line(0 + xMargin, height - yMargin, 0 + xMargin, 0 + yMargin); // y axis
     line(0 + xMargin, height - yMargin, width - xMargin, height - yMargin); //x axis
 }
-
-// function drawLabels(_maxVal, _minUnix, _maxUnix){
-//   //draw y labels 
-//   for(let j=0; j< _maxVal; j++){
-//     let yPos = map(j,0,_maxVal, height-yMargin, yMargin);
-//     text(j, xMargin-15, yPos);
-//   }
-
-//   //draw x labels (time)
-//   let startDay = dayjs.unix(_minUnix).date();
-//   let endDay = dayjs.unix(_maxUnix).date();
-
-//   let startHour = dayjs.unix(_minUnix).hour();
-//   let endHour = dayjs.unix(_maxUnix).hour();
-
-//   // console.log(startDay);
-//   // console.log(endDay);
-//   // console.log(startHour);
-//   // console.log(endHour);
-
-//   //days
-//   for(let i=startDay; i<=endDay; startDay+1){
-//     console.log(i);
-//     text(startDay +"/" + dayjs.unix(_minUnix).month(), xMargin, height-yMargin+30);
-
-//   }
-
-//    //hours
-//    for(let i=startHour; i<endHour; startHour+1){
-//     //console.log(i);
-    
-//   }
-//   //   stroke(0);
-//   //   fill(0);
-
-    
-
-//   //   
-
-//   //   if(data[i].date.hour() != ph){
-//   //     text(data[i].date.hour(), x, height-yMargin+15);
-//   //   }
-
-
-//   // }
-// }
