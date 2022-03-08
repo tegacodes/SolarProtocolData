@@ -5,27 +5,27 @@
 let yMargin = 50;
 let xMargin = 50;
 
-let dataV = []; //Array to hold voltage data
-let dataC = []; //Array to hold current data
-
 let pd, ph = 0;
 let v =0;
 let colors;
 let c=0; //color counter
+
+let dates = [];
+let params = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //loadJSON('http://solarprotocol.net/api/v2/opendata.php?day=3', gotCCData); 
 
   // Offline data
-  loadJSON('../../data/2-ccData-3days.json', gotVData); 
+  loadJSON('../../data/2-ccData-3days.json', gotCCData); 
 
   background(210);
   strokeWeight(0.5);
   textFont('Times');
   textSize(12);
  
-  colors = ["aqua", "blue", "red", "green", "yellow", "pink", "orange", "purple", "brown", "orangered", "orchid", "violet", "thistle"];
+  colors = ["aqua", "blue", "red", "green", "yellow", "pink", "orange", "purple", "brown", "orangered", "violet", "white"];
 
   noLoop(); //no need to loop draw
 }
@@ -37,82 +37,76 @@ function draw() {
 function gotCCData(tempData){
   // console.log(Object.keys(tempData.data));
 
-  let parameters = tempData["header"]
-  //put dates into arrays
-  let data = tempData["data"]
-  print(data)
+  params = tempData["header"];
+  //put data into a 2d array called data
+  let data = tempData["data"];
+  print("params: "+params.length);
+  print("timestamps: "+data.length);
+  //print(data[1813][12]);
 
-  // let dateStrings = Object.keys(tempData.data);
-  // //put valees into an array 
-  // let vals = Object.values(tempData.data);
+   // put dates into their own array 
+  for(let i=0; i< data.length; i++){
+    dates.push(dayjs(data[i][0]));
 
-
-  // //convert date strings into dayjs objects. Push date objects and values onto an array called dataV. 
-  // for(let i=0;i<dateStrings.length; i++){
-  //   dataV.push({date: dayjs(dateStrings[i]), val: Number(vals[i])})
-  // }
-
-  // //sort data by date so that it is in order
-  // dataV = dataV.sort((a, b) => (a.date.isAfter(b.date) ? 1 : -1))
-  
-  // //draw data sending name and data array as arguments
-  // drawData(tempData.header.datetime, dataV); 
-}
-
-function gotCData(tempData){
-  //put dates and vales into arrays
-  let dateStrings = Object.keys(tempData.data);
-  let vals = Object.values(tempData.data);
-
-  //convert date strings into dayjs objects. Push date objects and values onto an array called data. 
-  for(let i=0;i<dateStrings.length; i++){
-    dataC.push({date: dayjs(dateStrings[i]), val: Number(vals[i])})
   }
 
-  //sort data by date so that it is in order
-  dataC = dataC.sort((a, b) => (a.date.isAfter(b.date) ? 1 : -1))
+  // // draw data sending name and data array as arguments
+  let parameterName;
+  let maxYvalue=0;
+  for(let i=1; i<data[0].length; i++){ //for each parameter  
+    let values = [];
+    parameterName = params[i];
+    for(let j=0; j< data.length; j++){  //for each timestamp     
+      // print("i:"+i);
+      // print("j:"+j);
+      if(float(data[j][i]) > maxYvalue){
+        maxYvalue = float(data[j][i]);
+      }
+      values.push(float(data[j][i])); //put values into values array
+
+    }
+
+    // print(parameterName);
+    // print(dates);
+    // print(values);
+    drawCCData(parameterName, dates, values, maxYvalue);  //draw in data for that parameter
+  }
   
-  //draw data sending name and data array as arguments
-  drawData(tempData.header.datetime, dataC); 
 }
 
-function drawData(name, data){
-  //find max value of the parameter
-  let maxVal = max(data.map(d => d.val));
+function drawCCData(_name, _dates, _data, _maxY){
+  //print(_dates[0].unix());
   
   //find minimum and maximum time stamps
-  let minUnix = min(data.map(d => d.date.unix()));
-  let maxUnix = max(data.map(d => d.date.unix()));
-  // console.log(dayjs.unix(maxUnix));
-  // console.log(dayjs.unix(minUnix));
+
+  let minUnix = min(_dates.map(item => item.unix()));
+  //print(minUnix);
+  let maxUnix = max(_dates.map(item => item.unix()));
+  //print(maxUnix);
 
   let px = xMargin;
   let py = height-yMargin;
-  //graph data from data array
-  for(let i=0;i<data.length; i++){
-    //get y coordinates of points by remapping the values to the y axix
-    let y = map(data[i].val, 0, maxVal, height - yMargin, 0 + yMargin);
+  //graph data 
+  for(let i=0; i<_data.length; i++){
+    //get y coordinates of points by remapping the values to the y axis
+    let y = map(_data[i], 0, _maxY, height - yMargin, 0 + yMargin);
     //get x coordinates of points by remapping the dates to the x axix
-    let x = map(data[i].date.unix(), minUnix, maxUnix, xMargin, width - xMargin);
+    let x = map(_dates[i].unix(), minUnix, maxUnix, xMargin, width - xMargin);
    
     //set color
     stroke(colors[c]);
     fill(colors[c]);
 
     //draw data
-    line(px, py, x, y);
-    //ellipse(x, y, 2, 2);
 
-    //store previous values if you want to draw a line
-    px = x;
-    py = y;
-    
+    ellipse(x, y, 2, 2);
+
   }
 
-  rect(xMargin+80*v, height-30, 10, 10);
+  rect(xMargin+100*v, height-30, 10, 10);
   stroke(0);
   fill(0);
-  text(name, xMargin+20+80*v, height-20);
+  text(_name, xMargin+20+100*v, height-20);
   v++; //shift over label 
   c++; //move to next
 

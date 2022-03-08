@@ -68,7 +68,8 @@ function gotCData(tempData){
   }
 
   //sort data by date so that it is in order
-  dataC = dataC.sort((a, b) => (a.date.isAfter(b.date) ? 1 : -1))
+  dataC = dataC.sort((a, b) => (a.date.isAfter(b.date) ? 1 : -1));
+  print(dataC);
   
   //draw data sending name and data array as arguments
   drawData(tempData.header.datetime, dataC); 
