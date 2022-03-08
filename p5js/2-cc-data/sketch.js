@@ -1,5 +1,5 @@
-//This example graphs energy parameters through time from current active server in the Solar Protocol network.
-//preview data at http://solarprotocol.net/api/v2/opendata.php?value=PV-voltage&duration=2
+//Getting 3 days of data from active server
+//Preview data at http://solarprotocol.net/api/v1/
 
 //Set margins for the graph
 let yMargin = 50;
@@ -15,19 +15,17 @@ let c=0; //color counter
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  loadJSON('http://solarprotocol.net/api/v2/opendata.php?value=PV-voltage&duration=2', gotVData); 
-  loadJSON('http://solarprotocol.net/api/v2/opendata.php?value=PV-current&duration=2', gotCData); 
+  //loadJSON('http://solarprotocol.net/api/v2/opendata.php?day=3', gotCCData); 
 
   // Offline data
-  // loadJSON('../../data/1-PVVoltage-2d.json', gotVData); 
-  // loadJSON('../../data/1-PVCurrent-2d.json', gotCData); 
+  loadJSON('../../data/2-ccData-3days.json', gotVData); 
 
   background(210);
   strokeWeight(0.5);
   textFont('Times');
   textSize(12);
  
-  colors = ["blue", "red", "green", "yellow", "pink", "orange", "purple"];
+  colors = ["aqua", "blue", "red", "green", "yellow", "pink", "orange", "purple", "brown", "orangered", "orchid", "violet", "thistle"];
 
   noLoop(); //no need to loop draw
 }
@@ -36,25 +34,29 @@ function draw() {
   drawAxes();
 }
 
-function gotVData(tempData){
+function gotCCData(tempData){
   // console.log(Object.keys(tempData.data));
 
+  let parameters = tempData["header"]
   //put dates into arrays
-  let dateStrings = Object.keys(tempData.data);
-  //put valees into an array 
-  let vals = Object.values(tempData.data);
+  let data = tempData["data"]
+  print(data)
+
+  // let dateStrings = Object.keys(tempData.data);
+  // //put valees into an array 
+  // let vals = Object.values(tempData.data);
 
 
-  //convert date strings into dayjs objects. Push date objects and values onto an array called dataV. 
-  for(let i=0;i<dateStrings.length; i++){
-    dataV.push({date: dayjs(dateStrings[i]), val: Number(vals[i])})
-  }
+  // //convert date strings into dayjs objects. Push date objects and values onto an array called dataV. 
+  // for(let i=0;i<dateStrings.length; i++){
+  //   dataV.push({date: dayjs(dateStrings[i]), val: Number(vals[i])})
+  // }
 
-  //sort data by date so that it is in order
-  dataV = dataV.sort((a, b) => (a.date.isAfter(b.date) ? 1 : -1))
+  // //sort data by date so that it is in order
+  // dataV = dataV.sort((a, b) => (a.date.isAfter(b.date) ? 1 : -1))
   
-  //draw data sending name and data array as arguments
-  drawData(tempData.header.datetime, dataV); 
+  // //draw data sending name and data array as arguments
+  // drawData(tempData.header.datetime, dataV); 
 }
 
 function gotCData(tempData){
@@ -104,14 +106,18 @@ function drawData(name, data){
     //store previous values if you want to draw a line
     px = x;
     py = y;
+    
   }
+
   rect(xMargin+80*v, height-30, 10, 10);
   stroke(0);
   fill(0);
   text(name, xMargin+20+80*v, height-20);
   v++; //shift over label 
   c++; //move to next
+
 }
+
 
 function drawAxes(){
     //draw axes
