@@ -9,7 +9,8 @@
 
 #### Example: 0-single-value
 - Access a single data point from the server
-- [See example online.](https://editor.p5js.org/brain/sketches/hVA39SS-c)
+- [Code](https://github.com/tegacodes/SolarProtocolDataViz/blob/main/p5js/0-single-value/sketch.js)
+- [Example in code editor](https://editor.p5js.org/brain/sketches/hVA39SS-c)
 
 To access the data, [loadJSON()](https://p5js.org/reference/#/p5/loadJSON) is used with a callback function called gotData. 
 
@@ -19,7 +20,8 @@ loadJSON(URL, gotData);
 
 #### Example: 1-value-duration
 - Work with the timeseries of a charge controller parameter like current or voltage. 
-- [See example online.](https://editor.p5js.org/brain/sketches/VSCXfAwJ6)
+-  [Code](https://github.com/tegacodes/SolarProtocolDataViz/blob/main/p5js/1-value-duration/sketch.js)
+-  [Example in code editor](https://editor.p5js.org/brain/sketches/VSCXfAwJ6)
 
 - Uses day.js library to deal with dates and timestamps: [https://day.js.org/en/](https://day.js.org/en/)
 
@@ -27,7 +29,8 @@ loadJSON(URL, gotData);
 
 #### Example: 2-cc-data
 - Visualize the timeseries of all charge controller parameters
-- [See example online.](https://editor.p5js.org/brain/sketches/TThNw8pbk)
+- [Code](https://github.com/tegacodes/SolarProtocolDataViz/blob/main/p5js/2-cc-data/sketch.js)
+- [Example in code editor](https://editor.p5js.org/brain/sketches/TThNw8pbk)
 
 - Uses day.js library to deal with dates and timestamps: [https://day.js.org/en/](https://day.js.org/en/)
 
