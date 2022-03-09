@@ -120,7 +120,7 @@ def main():
     drawData(param, real_data, surface)
 
     # SAVE
-    surface.write_to_png("single-value.png")
+    surface.write_to_png("value-duration.png")
 
 if __name__ == "__main__":
     main()

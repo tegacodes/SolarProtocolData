@@ -19,7 +19,7 @@ ccValue = "PV-voltage"
 
 Pi = 3.14
 
-L = 600 # Image dimension
+L = 200 # Image dimension
 
 # FUNCTIONS
 
@@ -50,13 +50,13 @@ def main():
     param = list(getResult.values())[0]
 
     # INITIALIZE THE SURFACE
-    surface = gz.Surface(L,L, bg_color=(1,1,1))
+    surface = gz.Surface(L,L, bg_color=(1,0,1))
 
     # DRAW THE TEXT
-    txt = gz.text(param, fontfamily="Impact",  fontsize=40, fill=(0,0,0), xy=(200,100), angle=Pi/12)
+    txt = gz.text(param, fontfamily="Impact",  fontsize=20, fill=(0,0,0), xy=(100,50), angle=Pi/12)
     txt.draw(surface)
 
-    txt2 = gz.text(name, fontfamily="Impact",  fontsize=40, fill=(0,0,0), xy=(200,60), angle=Pi/12)
+    txt2 = gz.text(name, fontfamily="Impact",  fontsize=20, fill=(0,0,0), xy=(100,80), angle=Pi/12)
     txt2.draw(surface)
 
     # SAVE
