@@ -17,7 +17,7 @@ To access the data, [loadJSON()](https://p5js.org/reference/#/p5/loadJSON) is us
 loadJSON(URL, gotData); 
 ```
 
-####Example: 1-value-duration
+#### Example: 1-value-duration
 - Work with the timeseries of a charge controller parameter like current or voltage. 
 - [See example online.](https://editor.p5js.org/brain/sketches/VSCXfAwJ6)
 
@@ -25,7 +25,7 @@ loadJSON(URL, gotData);
 
 ![alt text](images/voltage-current-timeseries.png)
 
-####Example: 2-cc-data
+#### Example: 2-cc-data
 - Visualize the timeseries of all charge controller parameters
 - [See example online.](https://editor.p5js.org/brain/sketches/TThNw8pbk)
 
