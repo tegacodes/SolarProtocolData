@@ -1,18 +1,12 @@
 # Visualizing Solar Protocol Data 
 
-- Data is from the Solar Protocol API: [http://solarprotocol.net/api/v2/](http://solarprotocol.net/api/v1/)
-- Offline copies of API data are in data folder
+- Data is from the Solar Protocol API: [http://solarprotocol.net/api/v2/](http://solarprotocol.net/api/v1/). Please read the documentation there.
+- Offline examples of API data are saved in the data folder in this repository.
 
-Examples in:
-- Javascript using the P5 library (client side rendering)
-- Python using the Gizeh library (server side rendering)
+Examples are in Javascript (p5js) and Python (Gizeh).
 
-## Notes: 
-
-P5 Examples:
-- [https://p5js.org/](https://p5js.org/)
-- Uses the day.js library to deal with dates and timestamps: [https://day.js.org/en/](https://day.js.org/en/)
+- See the [P5JS tutorial.](p5js-tutorial.md)
+- See the [Python/Gizeh tutorial](python-gizeh-tutorial.md)
 
 
-Gizeh Examples: 
-- [https://github.com/Zulko/gizeh](https://github.com/Zulko/gizeh)
+
