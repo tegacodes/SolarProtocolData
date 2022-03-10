@@ -111,7 +111,7 @@ def main():
 
 
     # INITIALIZE THE SURFACE
-    surface = gz.Surface(w, h, bg_color=(1,1,1))
+    surface = gz.Surface(w, h, bg_color=(0.8,0.8,0.8))
 
     txt = gz.text(param, fontfamily="Times",  fontsize=12, fill=(0,0,0), xy=(w/2, 40))
     txt.draw(surface)

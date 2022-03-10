@@ -15,10 +15,10 @@ let params = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //loadJSON('http://solarprotocol.net/api/v2/opendata.php?day=3', gotCCData); 
+  loadJSON('http://74.73.93.241/api/v2/opendata.php?day=3', gotCCData); 
 
   // Offline data
-  loadJSON('../../data/2-ccData-3days.json', gotCCData); 
+  //loadJSON('../../data/2-ccData-3days.json', gotCCData); 
 
   background(210);
   strokeWeight(0.5);
@@ -92,7 +92,11 @@ function drawCCData(_name, _dates, _data, _maxY){
     let y = map(_data[i], 0, _maxY, height - yMargin, 0 + yMargin);
     //get x coordinates of points by remapping the dates to the x axix
     let x = map(_dates[i].unix(), minUnix, maxUnix, xMargin, width - xMargin);
-   
+    if(i%100==0){
+      noStroke();
+      fill(0);
+      text(_dates[i].format('MMM D'), x, height - yMargin + 15);
+    }
     //set color
     stroke(colors[c]);
     fill(colors[c]);
@@ -103,10 +107,10 @@ function drawCCData(_name, _dates, _data, _maxY){
 
   }
 
-  rect(xMargin+100*v, height-30, 10, 10);
+  rect(xMargin+100*v, height-20, 10, 10);
   stroke(0);
   fill(0);
-  text(_name, xMargin+20+100*v, height-20);
+  text(_name, xMargin+20+100*v, height-10);
   v++; //shift over label 
   c++; //move to next
 
