@@ -14,6 +14,8 @@ let serverNames = [];
 let timezoneArr = [];
 //ms
 let durationMS = 3 * 24 * 60 * 60 * 1000;
+let durationMin = durationMS / 1000 / 60;
+let minuteWidth;
 
 let val = "PV power L";
 let valPos;
@@ -22,6 +24,9 @@ let datetimePos;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  //set the width of each data point
+  minuteWidth = max((width - (xMargin * 2))/durationMin,1);
 
   //get time series data
   loadJSON(baseURL + serverCall, gotServerData); 
@@ -41,7 +46,7 @@ function draw() {
   drawKey();
 
   //save and reload page
-  setTimeout(saveIt, 10 * 60000);
+  //setTimeout(saveIt, 10 * 60000);
 
 /*  drawLabels();
 */}
@@ -222,15 +227,19 @@ function drawServerData(data, pos){
   let yRange = (height - (2*yMargin))/amtServers;
   for (let x=0;x < k.length; x++){
     let d = new Date(k[x]);
-    drawX =parseInt(map(d.getTime(), mostRecent, farthest, width-xMargin, xMargin));
+    drawX =parseInt(constrain(map(d.getTime(), mostRecent, farthest, width-xMargin, xMargin),xMargin,width-xMargin));
+    //console.log(drawX);
+
     if(drawX >= xMargin){
 
       //width of rect (this might cause an error if the server goes down)
-      if (x+1 < k.length){
+      /*if (x+1 < k.length){
         drawXw =parseInt(map(new Date(k[x-1]).getTime(), mostRecent, farthest, width-xMargin, xMargin));
       } else {
         drawXw = xMargin;
-      }
+      }*/
+      drawXw = constrain(drawX - minuteWidth, xMargin,width - xMargin);
+
       drawY = map(data[k[x]],0.0, 50.0, yRange, 0);
       drawColor = map(data[k[x]],0.0, 50.0, 0, 255);
       noStroke();
@@ -251,15 +260,19 @@ function drawPOEData(data){
   for (let x=0;x < data.length; x++){
     let d = new Date(data[x][0]);
     //console.log(d);
-    drawX =parseInt(map(d.getTime(), mostRecent, farthest, width-xMargin, xMargin));
+    drawX =parseInt(min(map(d.getTime(), mostRecent, farthest, width-xMargin, xMargin), width - xMargin));
+    //drawX =parseInt(map(d.getTime(), mostRecent, farthest, width-xMargin, xMargin));
     //console.log(drawX);
     //width of rect
     if (x >= 1){
       drawXw =parseInt(map(new Date(data[x-1][0]).getTime(), mostRecent, farthest, width-xMargin, xMargin));
+      //drawXw =parseInt(constrain(map(new Date(data[x-1][0]).getTime(), mostRecent, farthest, width-xMargin, xMargin),xMargin,width - xMargin));
     } else if (x == 0) {
       drawXw = width - xMargin;
       //circle(drawX,  yMargin + (yRange*data[x][1]), 10);
     }
+
+    drawXw = min(drawXw,width - xMargin);
 
     noStroke();
     fill(0,255,0,155);
