@@ -1,4 +1,4 @@
-# Visualizing Solar Protocol Data 
+# Working with Solar Protocol Data 
 
 - Data is from the Solar Protocol API: [http://solarprotocol.net/api/v2/](http://solarprotocol.net/api/v1/). Please read the documentation there.
 - Offline examples of API data are saved in the data folder in this repository.
