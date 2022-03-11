@@ -5,7 +5,7 @@
 
 Examples are in Javascript (p5js) and Python (Gizeh).
 
-## P5JS (client side rendering)
+# P5JS (client side rendering)
 - Javascript using the P5 library. [https://p5js.org/](https://p5js.org/)
 - If running your code from a local server, access the network data direct from [the Solar Protocol API](http://solarprotocol.net/api/v1/). If developing in an online editor, you will need to use the development server to access network data due to the [Cross-Origin Resource Sharing standard](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) that will block http requests from https servers. Development server is here: [https://server.solarpowerforartists.com](https://server.solarpowerforartists.com/)
 
@@ -49,14 +49,14 @@ loadJSON(URL, gotData);
 
 ![alt text](images/routing.png)
 
-## Python (server side rendering)
+# Python (server side rendering)
 
 - Visualizing data server side using Python and either a plotting library called Plotly or a graphics library called Gizeh:
 
 ### Plotly
 - Documentation: [https://plotly.com/](https://plotly.com/)
 
-### Example: 0-single-value
+#### Example: 0-single-value
 - Access a single data point from the server
 - [Code](https://github.com/tegacodes/SolarProtocolData/blob/main/plotly/0-single-value-timeseries.py)
 
