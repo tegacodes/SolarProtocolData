@@ -7,7 +7,7 @@ Examples are in Javascript (p5js) and Python (Gizeh).
 
 ## P5JS (client side rendering)
 - Javascript using the P5 library. [https://p5js.org/](https://p5js.org/)
-- If running your code from a local server, access the network data direct from the Solar Protocol API at [http://solarprotocol.net/api/v2/](http://solarprotocol.net/api/v1/). If developing in an online editor, you will need to use the development server to access network data due to the [Cross-Origin Resource Sharing standard](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) that will block http requests from https servers. Development server is here: [https://server.solarpowerforartists.com](https://server.solarpowerforartists.com/)
+- If running your code from a local server, access the network data direct from [the Solar Protocol API](http://solarprotocol.net/api/v1/). If developing in an online editor, you will need to use the development server to access network data due to the [Cross-Origin Resource Sharing standard](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) that will block http requests from https servers. Development server is here: [https://server.solarpowerforartists.com](https://server.solarpowerforartists.com/)
 
 
 #### Install p5.js:
