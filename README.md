@@ -46,7 +46,6 @@ loadJSON(URL, gotData);
 
 ## Python (server side rendering)
 
-
 - Visualizing data server side using Python and a library called Gizeh 
 - Documentation: [https://github.com/Zulko/gizeh](https://github.com/Zulko/gizeh)
 

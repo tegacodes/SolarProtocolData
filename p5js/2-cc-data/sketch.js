@@ -15,7 +15,7 @@ let params = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  loadJSON('http://74.73.93.241/api/v2/opendata.php?day=3', gotCCData); 
+  loadJSON('http://solarprotocol.net/api/v2/opendata.php?day=3', gotCCData); 
 
   // Offline data
   //loadJSON('../../data/2-ccData-3days.json', gotCCData); 
