@@ -47,6 +47,8 @@ loadJSON(URL, gotData);
 - Visualizes time series of parameters from all servers on the network.
 - [Code](https://github.com/tegacodes/SolarProtocolData/tree/main/p5js/point-of-entry)
 
+![alt text](images/routing.png)
+
 ## Python (server side rendering)
 
 - Visualizing data server side using Python and a library called Gizeh 
