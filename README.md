@@ -43,6 +43,9 @@ loadJSON(URL, gotData);
 
 ![alt text](images/all-params-timeseries.png)
 
+### Example: 3 Point of Entry
+- Visualizes time series of parameters from all servers on the network.
+- [Code](https://github.com/tegacodes/SolarProtocolData/tree/main/p5js/point-of-entry)
 
 ## Python (server side rendering)
 
