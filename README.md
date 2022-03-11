@@ -51,7 +51,17 @@ loadJSON(URL, gotData);
 
 ## Python (server side rendering)
 
-- Visualizing data server side using Python and a library called Gizeh 
+- Visualizing data server side using Python and either a plotting library called Plotly or a graphics library called Gizeh:
+
+### Plotly
+- Documentation: [https://plotly.com/](https://plotly.com/)
+
+### Example: 0-single-value
+- Access a single data point from the server
+- [Code](https://github.com/tegacodes/SolarProtocolData/blob/main/plotly/0-single-value-timeseries.py)
+
+
+### Gizeh
 - Documentation: [https://github.com/Zulko/gizeh](https://github.com/Zulko/gizeh)
 
 #### Install Gizeh
