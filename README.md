@@ -82,6 +82,6 @@ Color
 
 ### Example: 2-cc-data
 - Visualize the timeseries of all charge controller parameters
-- Code
+- Code coming soon.
 
 
