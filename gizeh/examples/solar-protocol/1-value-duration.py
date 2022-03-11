@@ -4,7 +4,6 @@ Preview data: http://solarprotocol.net/api/v2/opendata.php?value=PV-voltage&dura
 """
 
 import gizeh as gz
-import numpy as np
 import requests
 import json
 from json.decoder import JSONDecodeError

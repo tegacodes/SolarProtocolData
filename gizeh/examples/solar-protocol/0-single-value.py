@@ -4,7 +4,6 @@ It then displays it using the Gizeh python library:
 """
 
 import gizeh as gz
-import numpy as np
 import requests
 import json
 from json.decoder import JSONDecodeError
