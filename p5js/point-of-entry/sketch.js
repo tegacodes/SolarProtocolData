@@ -1,6 +1,6 @@
 //this script demonstrates how to work with time in JS
 
-let baseURL = 'http://74.73.93.241/api/v2/opendata.php?';
+let baseURL = 'http://solarprotocol.net/api/v2/opendata.php?';
 
 /*let getTZ = 'systemInfo=tz';*/
 let serverCall = 'server=all';

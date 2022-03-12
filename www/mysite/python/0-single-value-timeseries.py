@@ -42,7 +42,7 @@ def main():
     if not os.path.exists("images"):
         os.mkdir("images")
 
-    fig.write_image("images/fig1-seaborn.png")
+    fig.write_image("../images/fig1.png")
 
 if __name__ == "__main__":
     main()
